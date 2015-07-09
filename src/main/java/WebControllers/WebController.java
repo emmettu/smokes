@@ -14,18 +14,47 @@ import java.util.concurrent.TimeUnit;
 public class WebController {
 
     private WebDriver driver;
-    private final static String URL = "http://127.0.0.1:9990/console/App.html";
-
-    public void testWebsite() {
-    }
+    private final static String HOSTNAME = "http://localhost:9990/console/App.html";
+    private final static String DEPLOYMENT_URL = "http://localhost:8080/mass-bugzilla-modifier";
+    private final static String[] SUB_URLS = {
+            "#deployments",
+            "#datasources",
+            "#interfaces",
+            "#socket-bindings",
+            "#path",
+            "#properties",
+            "#server-overview",
+            "#vm",
+            "#environment",
+            "#logfiles",
+            "#ds-metrics",
+            "#jpa-metrics",
+            "#naming",
+            "#tx-logs",
+            "#tx-metrics",
+            "#web-metrics",
+            "#webservice-runtime",
+            "#role-assignment",
+            "#patching"
+    };
 
     public WebController() {
         setUpDriver();
-        driver.get(URL);
     }
 
     private void setUpDriver() {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get(HOSTNAME);
+    }
+
+    public void testWebsite() {
+        goToAllWebPages();
+    }
+    private void goToAllWebPages() {
+        for(int i = 0; i < SUB_URLS.length; i++) {
+            driver.get(HOSTNAME+SUB_URLS[i]);
+        }
+        driver.get(DEPLOYMENT_URL);
     }
 }
