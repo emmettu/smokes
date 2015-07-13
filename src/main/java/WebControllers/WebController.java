@@ -2,6 +2,7 @@ package WebControllers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,9 +41,15 @@ public class WebController {
         setUpDriver();
     }
     private void setUpDriver() {
-        driver = new FirefoxDriver();
+        FirefoxProfile profile = setUpProfile();
+        driver = new FirefoxDriver(profile);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(HOSTNAME);
+    }
+    private FirefoxProfile setUpProfile() {
+        FirefoxProfile profile = new FirefoxProfile();
+        profile.setPreference(FirefoxProfile.ALLOWED_HOSTS_PREFERENCE, "localhost.localdomain localhost");
+        return profile;
     }
     public void testWebsite() {
         goToAllManagementWebPages();
