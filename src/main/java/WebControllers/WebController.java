@@ -39,20 +39,24 @@ public class WebController {
     public WebController() {
         setUpDriver();
     }
-
     private void setUpDriver() {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(HOSTNAME);
     }
-
     public void testWebsite() {
-        goToAllWebPages();
+        goToAllManagementWebPages();
+        goToDeploymentWebPageIfStandalone();
     }
-    private void goToAllWebPages() {
+    private void goToAllManagementWebPages() {
         for(int i = 0; i < SUB_URLS.length; i++) {
             driver.get(HOSTNAME+SUB_URLS[i]);
         }
-        driver.get(DEPLOYMENT_URL);
+    }
+    private void goToDeploymentWebPageIfStandalone() {
+        boolean serverPropertySet = System.getProperties().containsKey("SERVER");
+        if(serverPropertySet  && System.getProperty("SERVER").equals("standalone")) {
+            driver.get(DEPLOYMENT_URL);
+        }
     }
 }
