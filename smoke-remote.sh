@@ -11,7 +11,7 @@ jboss_as_dir="/usr/share/jbossas/"
 jar_file="original-smokes-1.0-SNAPSHOT.jar"
 
 function main() {
-    get_pacakges
+    get_packages
     add_jbossas_user
     get_deployment_app
     get_smoke_jar
