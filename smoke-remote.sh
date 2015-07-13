@@ -1,4 +1,9 @@
 #!/bin/bash
+#Emmett Underhill July 7 2015
+#This is the script that gets run on the vm
+#during a smoke testing session. I won't comment
+#on what it does exactly because that is outlined
+#clearly in the main function
 
 username="admin"
 password="qwer#1234"
@@ -6,6 +11,7 @@ jboss_as_dir="/usr/share/jbossas/"
 jar_file="original-smokes-1.0-SNAPSHOT.jar"
 
 function main() {
+    get_pacakges
     add_jbossas_user
     get_deployment_app
     get_smoke_jar
@@ -15,7 +21,11 @@ function main() {
     kill_firefox
 }
 
-
+function get_packages() {
+    yum -y groupinstall "X Window System" Desktop
+    yum -y install firefox
+    yum -y install figlet
+}
 function add_jbossas_user() {
     $jboss_as_dir"bin/add-user.sh" $username $password
 }
