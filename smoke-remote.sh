@@ -53,7 +53,7 @@ function test_jbossas_domain() {
 }
 function install_figlet_from_source() {
     wget -N ftp://ftp.figlet.org/pub/figlet/program/unix/figlet-2.2.5.tar.gz
-    tar xzf figlet*.tar
+    tar xzf figlet*.tar.gz
     cd figlet*
     sed -i 's/$(prefix)\/share\/figlet/fonts/g' Makefile
     make figlet
