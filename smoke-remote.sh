@@ -15,6 +15,7 @@ function main() {
     add_jbossas_user
     get_deployment_app
     get_smoke_jar
+    setup_hosts_file
     test_jbossas
     test_jbossas_domain
     print_logs
@@ -32,6 +33,10 @@ function add_jbossas_user() {
 
 function get_deployment_app() {
     wget s01.yyz.redhat.com/dcheung/mass-bugzilla-modifier.war -O $jboss_as_dir"standalone/deployments/mass-bugzilla-modifier.war"
+}
+
+function setup_hosts_file() {
+    echo 127.0.0.1 localhost localhost.localdomain > /etc/hosts
 }
 
 function get_smoke_jar() {
