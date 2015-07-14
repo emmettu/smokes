@@ -60,8 +60,9 @@ function install_figlet_from_source() {
 }
 
 function print_logs() {
+    cd $HOME/figlet*
+    ./figlet '!!!ERRORS!!!'
     cd "/var/log/jbossas"
-    $HOME/figlet*/figlet "!!!ERRORS!!!"
     echo "Hey, nice job if you're reading this then there aren't any errors!"
     echo "However if there's stuff after this message then there ARE errors"
     echo "in which case I revoke the nice job."
