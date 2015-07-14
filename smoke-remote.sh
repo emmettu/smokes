@@ -18,6 +18,7 @@ function main() {
     setup_hosts_file
     test_jbossas
     test_jbossas_domain
+    install_figlet_from_source
     print_logs
     kill_firefox
 }
@@ -51,10 +52,17 @@ function test_jbossas_domain() {
     service jbossas-domain start && java -jar $jar_file
     service jbossas-domain stop
 }
+function install_figlet_from_source() {
+    wget ftp://ftp.figlet.org/pub/figlet/program/unix/figlet-2.2.5.tar.gz
+    tar xzf figlet*.tar
+    cd figlet*
+    sed -i 's/$(prefix)\/share\/figlet/fonts/g' Makefile
+    make figlet
+}
 
 function print_logs() {
     cd "/var/log/jbossas"
-    figlet !!!ERRORS!!!
+    $HOME/figlet*/figlet "!!!ERRORS!!!"
     echo "Hey, nice job if you're reading this then there aren't any errors!"
     echo "However if there's stuff after this message then there ARE errors"
     echo "in which case I revoke the nice job."
