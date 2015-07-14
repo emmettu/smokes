@@ -26,7 +26,6 @@ function main() {
 function get_packages() {
     yum -y groupinstall "X Window System" Desktop
     yum -y install firefox
-    yum -y install figlet
 }
 function add_jbossas_user() {
     $jboss_as_dir"bin/add-user.sh" $username $password
@@ -53,7 +52,7 @@ function test_jbossas_domain() {
     service jbossas-domain stop
 }
 function install_figlet_from_source() {
-    wget ftp://ftp.figlet.org/pub/figlet/program/unix/figlet-2.2.5.tar.gz
+    wget -N ftp://ftp.figlet.org/pub/figlet/program/unix/figlet-2.2.5.tar.gz
     tar xzf figlet*.tar
     cd figlet*
     sed -i 's/$(prefix)\/share\/figlet/fonts/g' Makefile
