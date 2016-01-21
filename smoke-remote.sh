@@ -44,8 +44,8 @@ function get_smoke_jar() {
 }
 
 function test_jbossas() {
-    service eap7-wildfly start && java -jar -DSERVER=standalone $jar_file
-    service eap7-wildfly stop
+    service jbossas start && java -jar -DSERVER=standalone $jar_file
+    service jbossas stop
 }
 function test_jbossas_domain() {
     service jbossas-domain start && java -jar $jar_file
