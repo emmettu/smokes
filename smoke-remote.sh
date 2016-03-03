@@ -14,8 +14,6 @@ function main() {
     get_packages
     add_jbossas_user
     get_deployment_app
-    get_smoke_jar
-    setup_hosts_file
     test_jbossas
     test_jbossas_domain
     install_figlet_from_source
@@ -39,16 +37,12 @@ function setup_hosts_file() {
     echo 127.0.0.1 localhost localhost.localdomain > /etc/hosts
 }
 
-function get_smoke_jar() {
-    wget s01.yyz.redhat.com/eunderhi/$jar_file -O $HOME/$jar_file
-}
-
 function test_jbossas() {
-    service jbossas start && java -jar -DSERVER=standalone $jar_file
+    service jbossas start && firefox http://localhost:9990 && firefox http://localhost:8080/mass-bugzilla-modifier
     service jbossas stop
 }
 function test_jbossas_domain() {
-    service jbossas-domain start && java -jar $jar_file
+    service jbossas-domain start && firefox http://localhost:9990
     service jbossas-domain stop
 }
 function install_figlet_from_source() {
@@ -68,6 +62,7 @@ function print_logs() {
     echo "in which case I revoke the nice job."
     grep -RHEin "ERROR|FATAL|EXCEPT" . | grep -v "DEBUG"
 }
+
 function kill_firefox() {
     killall firefox
 }

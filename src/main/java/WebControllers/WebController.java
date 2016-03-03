@@ -41,8 +41,8 @@ public class WebController {
         setUpDriver();
     }
     private void setUpDriver() {
-        FirefoxProfile profile = setUpProfile();
-        driver = new FirefoxDriver(profile);
+        //FirefoxProfile profile = setUpProfile();
+        driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(HOSTNAME);
     }
